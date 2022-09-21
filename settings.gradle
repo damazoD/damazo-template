@@ -16,3 +16,4 @@ rootProject.name = "Template"
 include ':app'
 include ':core:network'
 include ':core:uicomponents'
+include ':core:theming'

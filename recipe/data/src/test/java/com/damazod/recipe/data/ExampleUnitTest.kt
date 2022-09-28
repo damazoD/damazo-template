@@ -1,4 +1,4 @@
-package com.damazod.other
+package com.damazod.recipe.data
 
 import org.junit.Test
 

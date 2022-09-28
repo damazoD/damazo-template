@@ -3,10 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlinx-serialization'
 }
 
 android {
-    namespace 'com.damazod.other'
+    namespace 'com.damazod.recipe.domain'
     compileSdk 33
 
     defaultConfig {
@@ -33,20 +34,20 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':core:network')
+    implementation project(path: ':core:appreversed')
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-beta02'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
 
-    implementation project(path: ':core:network')
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0"
 
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
-    testImplementation 'com.google.dagger:hilt-android-testing:2.38.1'
-    kaptTest  'com.google.dagger:hilt-compiler:2.38.1'
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    testImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptTest  'com.google.dagger:hilt-compiler:2.44'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

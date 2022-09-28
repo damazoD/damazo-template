@@ -1,5 +1,6 @@
-package com.damazod.core.network
+package com.damazod.core.network.di
 
+import com.damazod.appreversed.ApiData
 import com.damazod.core.network.interceptor.HeaderInterceptor
 import com.damazod.core.network.interceptor.InterceptorContainer
 import dagger.Module
@@ -12,10 +13,10 @@ import dagger.hilt.components.SingletonComponent
 object InterceptorComponent {
 
     @Provides
-    fun getOkHttpInterceptor(): InterceptorContainer {
+    fun getOkHttpInterceptor(apiApiData: ApiData): InterceptorContainer {
         return InterceptorContainer(
             applicationInterceptors = listOf(
-                HeaderInterceptor()
+                HeaderInterceptor(apiApiData)
             ),
             networkInterceptors = emptyList()
         )

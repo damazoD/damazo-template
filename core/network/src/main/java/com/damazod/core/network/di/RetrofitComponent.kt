@@ -1,6 +1,6 @@
-package com.damazod.core.network
+package com.damazod.core.network.di
 
-import com.damazod.appreversed.BaseUrl
+import com.damazod.appreversed.ApiData
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -16,16 +16,17 @@ import retrofit2.Retrofit
 @InstallIn(SingletonComponent::class)
 object RetrofitComponent {
 
-   @Provides
-   @ExperimentalSerializationApi
-    fun getRetrofit(okHttpClient: OkHttpClient, apiBaseUrl: BaseUrl): Retrofit{
+    @Provides
+    @ExperimentalSerializationApi
+    fun getRetrofit(okHttpClient: OkHttpClient, apiData: ApiData): Retrofit {
         val contentType = "application/json".toMediaType()
-        val convertFactory = Json.asConverterFactory(contentType)
+        val jsonFormat = Json { ignoreUnknownKeys = true }
+        val convertFactory = jsonFormat.asConverterFactory(contentType)
 
         return Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(convertFactory)
-            .baseUrl(apiBaseUrl.value)
+            .baseUrl(apiData.baseUrl)
             .build()
     }
 }

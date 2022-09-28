@@ -1,4 +1,4 @@
-package com.damazod.core.network
+package com.damazod.core.network.di
 
 import com.damazod.core.network.interceptor.InterceptorContainer
 import dagger.Module

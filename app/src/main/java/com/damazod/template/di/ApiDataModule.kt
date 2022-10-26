@@ -1,6 +1,6 @@
 package com.damazod.template.di
 
-import com.damazod.appreversed.BaseUrl
+import com.damazod.appreversed.ApiData
 import com.damazod.template.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -10,14 +10,16 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiComponent {
+object ApiDataModule {
 
     @Singleton
     @Provides
-    fun getBaseURL(): BaseUrl {
-        return object : BaseUrl {
-            override val value: String
+    fun getBaseURL(): ApiData {
+        return object : ApiData {
+            override val baseUrl: String
                 get() = BuildConfig.BASE_URL
+            override val apiKey: String
+                get() = BuildConfig.API_KEY
         }
     }
 }

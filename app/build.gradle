@@ -3,8 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-
+    id 'kotlinx-serialization'
 }
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace 'com.damazod.template'
@@ -25,12 +27,14 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", '"example"'
+            buildConfigField "String", "BASE_URL", '"https://api.spoonacular.com/"'
+            buildConfigField "String", "API_KEY", localProperties.getProperty("apiKey")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"example"'
+            buildConfigField "String", "BASE_URL", '"https://api.spoonacular.com/"'
+            buildConfigField "String", "API_KEY", localProperties.getProperty("apiKey")
         }
     }
     compileOptions {
@@ -63,15 +67,15 @@ hilt {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-beta02'
-
     implementation project(path: ':core:network')
     implementation project(path: ':core:appreversed')
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.compose.material3:material3:1.0.0-beta03'
 
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"

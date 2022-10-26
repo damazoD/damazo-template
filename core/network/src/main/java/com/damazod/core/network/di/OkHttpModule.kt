@@ -9,7 +9,7 @@ import okhttp3.OkHttpClient
 
 @Module
 @InstallIn(SingletonComponent::class)
-object OkHttpComponent {
+internal object OkHttpModule {
 
     @Provides
     fun getOkHttpClient(interceptorContainer: InterceptorContainer): OkHttpClient {

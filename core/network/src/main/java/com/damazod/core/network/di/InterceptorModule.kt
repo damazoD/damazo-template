@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object InterceptorComponent {
+internal object InterceptorModule {
 
     @Provides
     fun getOkHttpInterceptor(apiApiData: ApiData): InterceptorContainer {
